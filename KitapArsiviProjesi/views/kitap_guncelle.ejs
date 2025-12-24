@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input { width: 100%; padding: 8px; box-sizing: border-box; }
+        .hata { color: red; font-weight: bold; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kitap Güncelle</h1>
+        <nav>
+            <a href="/">Ana Sayfa</a> | 
+            <a href="/kitaplar">Kitap Listesi</a> | 
+            <a href="/kitaplar/ekle">Yeni Kitap Ekle</a> | 
+            <a href="/hakkinda">Hakkında</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Kitabı Güncelle: <%= kitap.ad %></h2>
+
+        <% if (typeof hata !== 'undefined') { %>
+            <div class="hata">Hata: <%= hata %></div>
+        <% } %>
+
+        <form method="POST" action="/kitaplar/guncelle/<%= kitap.id %>"> 
+            
+            <div class="form-group">
+                <label for="ad">Kitap Adı (*)</label>
+                <input type="text" id="ad" name="ad" value="<%= kitap.ad %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="yazar">Yazar Adı (*)</label>
+                <input type="text" id="yazar" name="yazar" value="<%= kitap.yazar %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="yayinyili">Yayın Yılı</label>
+                <input type="number" id="yayinyili" name="yayinyili" value="<%= kitap.yayinyili %>">
+            </div>
+
+            <div class="form-group">
+                <label for="isbn">ISBN (Benzersiz)</label>
+                <input type="text" id="isbn" name="isbn" value="<%= kitap.isbn %>">
+            </div>
+            
+            <button type="submit">Güncellemeyi Kaydet</button>
+        </form>
+    </main>
+</body>
+</html>

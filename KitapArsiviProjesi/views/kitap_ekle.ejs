@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Kitap Arşivim</h1>
+        <nav>
+            <a href="/">Ana Sayfa</a>
+            <a href="/kitaplar">Kitap Listesi</a>
+            <a href="/kitaplar/ekle">Yeni Kitap Ekle</a>
+            <a href="/hakkinda">Hakkında</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Yeni Kitap Ekle</h2>
+        
+        <form action="/kitaplar" method="POST">
+            
+            <div class="form-group">
+                <label for="kitap_adi">Kitap Adı (*)</label>
+                <input type="text" id="kitap_adi" name="kitap_adi" placeholder="Kitabın adını yazınız..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="yazar">Yazar (*)</label>
+                <input type="text" id="yazar" name="yazar" placeholder="Yazarın adını yazınız..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="sayfa_sayisi">Sayfa Sayısı</label>
+                <input type="number" id="sayfa_sayisi" name="sayfa_sayisi" placeholder="Örn: 350">
+            </div>
+
+            <button type="submit">Kitabı Arşive Kaydet</button>
+            <a href="/kitaplar" style="margin-left: 15px; color: var(--ana-renk); text-decoration: none;">Vazgeç</a>
+        </form>
+    </main>
+
+</body>
+</html>

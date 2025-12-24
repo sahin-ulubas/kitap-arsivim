@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Kitap Arşivim</h1>
+        <nav>
+            <a href="/">Ana Sayfa</a>
+            <a href="/kitaplar">Kitap Listesi</a>
+            <a href="/kitaplar/ekle">Yeni Kitap Ekle</a>
+            <a href="/hakkinda">Hakkında</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3><%= stats.toplamKitap %></h3>
+                <p>Toplam Kitap</p>
+            </div>
+            <div class="stat-card">
+                <h3><%= stats.toplamSayfa %></h3>
+                <p>Okunan Sayfa</p>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="kitapAra" placeholder="Kitap adı veya yazar ara..." onkeyup="aramaYap()">
+        </div>
+
+        <h2>Tüm Kitaplar</h2>
+
+        <ul class="kitap-listesi">
+            <% if (kitaplar.length > 0) { %>
+                <% kitaplar.forEach(kitap => { %>
+                    <li class="kitap-kart">
+                        <div class="kitap-bilgi">
+                            <strong><%= kitap.kitap_adi %></strong> 
+                            <span class="yazar-adi"> - <%= kitap.yazar %></span>
+                            <div class="sayfa-bilgi"><%= kitap.sayfa_sayisi %> Sayfa</div>
+                        </div>
+                        <div class="actions">
+                            <a href="/kitaplar/guncelle/<%= kitap.id %>" class="btn-duzenle">Düzenle</a>
+                            <a href="/kitaplar/sil/<%= kitap.id %>" class="btn-sil" onclick="return confirm('Bu kitabı silmek istediğinize emin misiniz?')">Sil</a>
+                        </div>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <p>Henüz kitap eklenmemiş. <a href="/kitaplar/ekle">Buradan ekleyebilirsiniz.</a></p>
+            <% } %>
+        </ul>
+    </main>
+
+    <script>
+        function aramaYap() {
+            // Arama kutusuna yazılan metni al ve küçük harfe çevir
+            let input = document.getElementById('kitapAra').value.toLowerCase();
+            // Tüm kitap kartlarını seç
+            let cards = document.getElementsByClassName('kitap-kart');
+            
+            for (let i = 0; i < cards.length; i++) {
+                // Her kartın içindeki metni kontrol et
+                let text = cards[i].innerText.toLowerCase();
+                
+                // Eğer aranan kelime metinde varsa göster, yoksa gizle
+                if (text.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
